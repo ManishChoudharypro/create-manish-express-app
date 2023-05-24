@@ -1,12 +1,10 @@
 {
-  "name": "manish-express-ts-app",
-  "version": "1.0.1",
+  "name": "create-manish-express-app",
+  "version": "1.0.3",
   "description": "",
   "type": "module",
   "main": "index.ts",
-  "bin": {
-    "manish-express-ts-app": "*/**"
-  },
+  "bin": "./bin/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch './**/*.ts' --exec ts-node-esm --experimental-specifier-resolution=node index.ts",
