@@ -1,6 +1,6 @@
 {
   "name": "create-manish-express-app",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "type": "module",
   "main": "index.ts",
@@ -10,7 +10,8 @@
     "dev": "nodemon --watch './**/*.ts' --exec ts-node-esm --experimental-specifier-resolution=node index.ts",
     "start": "node --experimental-specifier-resolution=node ./build/index.js",
     "serve": "tsc && node ./dist/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "install": "npx create-manish-express-app <your_project_name> <npm/yarn> "
   },
   "keywords": [],
   "author": "",
