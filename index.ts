@@ -4,7 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { AuthRoute } from './src/routes';
+import * as Routes from './src/routes';
 const currentModuleUrl = import.meta.url,
   currentModulePath = dirname(fileURLToPath(currentModuleUrl)),
   { PORT, ENVIRONMENT } = process.env,
@@ -27,7 +27,7 @@ Server.set('trust proxy', true)
     )
   )
   .use(logRequest)
-  .use('/api/user', AuthRoute)
+  .use('/api/user', Routes.AuthRoute)
   .listen(Number(PORT), '0.0.0.0', () => {
     console.log(`Server is listened on PORT:${PORT}`);
     process.on('SIGINT', function () {

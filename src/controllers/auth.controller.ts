@@ -1,39 +1,71 @@
+import { config } from 'dotenv';
+config();
 import httpStatus from '../utils/httpStatus';
 import bcrypt from 'bcrypt';
 import decodeToken from '../utils/decodeToken';
 import { Request, Response, NextFunction } from 'express';
-
+import UserTable from '../models/user.model';
+import jwt from 'jsonwebtoken';
+const { ENCRYPTION_KEY } = process.env;
 export const login = async (credentials: {
+    email: string;
     password: string;
-    email?: string;
-    phone?: string;
   }) => {
     try {
-      const comparePass = bcrypt.compareSync(
-        credentials.password, //user submitted password
-        credentials.password //password from database
+      const User = await UserTable.find(
+        user => user.email == credentials.email
       );
-      if (comparePass) {
+      if (User == null) {
         return {
-          status: httpStatus.success,
-          error: false,
-          message: 'User Verified',
+          status: httpStatus.not_found,
+          error: true,
+          message: 'Account Not Found!',
           data: null,
         };
       } else {
-        return {
-          error: true,
-          data: null,
-          status: 404,
-          message: 'Account Not Found. Try E-Mail',
-        };
+        //?  Compare the passwords using "bcrypt" package
+        // const comparePass = bcrypt.compareSync(
+        //   credentials.password, //user submitted password
+        //   credentials.password //password from database
+        // );
+        const comparePass = User.password == credentials.password;
+        if (comparePass) {
+          const Token = jwt.sign(
+            {
+              id: User.id,
+              name: User.name,
+              email: User.email,
+              last_login: new Date().toJSON(),
+            },
+            ENCRYPTION_KEY,
+            { expiresIn: '7d' }
+          );
+          return {
+            status: httpStatus.success,
+            error: false,
+            message: 'Logged In',
+            data: {
+              id: User.id,
+              name: User.name,
+              email: User.email,
+              token: Token,
+            },
+          };
+        } else {
+          return {
+            error: true,
+            data: null,
+            status: httpStatus.not_acceptable,
+            message: 'Incorrect Email or Passsword',
+          };
+        }
       }
     } catch (err) {
       return {
-        status: 500,
+        status: httpStatus.internal_server_error,
         error: true,
         data: String(err),
-        message: 'Error While Log-in',
+        message: 'Unable to Log-in! Try-Again.',
       };
     }
   },
