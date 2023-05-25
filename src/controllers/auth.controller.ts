@@ -56,7 +56,7 @@ export const login = async (credentials: {
             error: true,
             data: null,
             status: httpStatus.not_acceptable,
-            message: 'Incorrect Email or Passsword',
+            message: 'Incorrect Email or Password',
           };
         }
       }

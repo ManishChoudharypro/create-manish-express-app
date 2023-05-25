@@ -8,7 +8,7 @@ This is a template project to setup ExpressJS project in Type-Script as fast ⚡
 
 # What does it offers?
 
-- Fastest possible and easiest way to implement an API
+- Fastest and easiest possible way to implement an API
 - Proper File Structure of ExpressJS
 - Multer File Uploader Integrated
 - "bcrypt" for Passwords Integrated
