@@ -23,9 +23,10 @@ const { MAX_FILE_SIZE_IN_MB } = process.env,
     storage: multerStorage,
     limits: { fileSize: maxSize },
     fileFilter(req: Express.Request, file: { originalname: string }, cb: any) {
-      if (!file.originalname.match(/\.(png|jpg|jpeg|svg|pdf)$/)) {
-        return cb('Invalid format');
-      }
+      //! VALIDATION FOR ALOWED FILE FORMATS
+      // if (!file.originalname.match(/\.(png|jpg|jpeg|svg|pdf)$/)) {
+      //   return cb('Invalid format');
+      // }
       cb(undefined, true);
     },
   });

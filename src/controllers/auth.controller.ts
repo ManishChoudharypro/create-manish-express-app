@@ -1,7 +1,6 @@
 import { config } from 'dotenv';
 config();
 import httpStatus from '../utils/httpStatus';
-import bcrypt from 'bcrypt';
 import decodeToken from '../utils/decodeToken';
 import { Request, Response, NextFunction } from 'express';
 import UserTable from '../models/user.model';

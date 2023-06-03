@@ -1,5 +1,5 @@
 //here we will define our tables
-const UserTable = [
+var UserTable = [
   {
     id: 1,
     name: 'Manish',

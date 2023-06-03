@@ -27,7 +27,8 @@ Server.set('trust proxy', true)
     )
   )
   .use(logRequest)
-  .use('/api/user', Routes.AuthRoute)
+  .use('/api/auth', Routes.AuthRoute)
+  .use('/api/user', Routes.UserRoutes)
   .listen(Number(PORT), '0.0.0.0', () => {
     console.log(`Server is listened on PORT:${PORT}`);
     process.on('SIGINT', function () {
